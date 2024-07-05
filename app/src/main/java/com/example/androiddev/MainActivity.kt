@@ -1,150 +1,150 @@
 package com.example.androiddev
 
-import android.graphics.fonts.FontStyle
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.rounded.ShoppingCart
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
-//import androidx.compose.ui.text.font.FontStyle.
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import com.example.androiddev.ui.theme.AndroidDevTheme
-import java.time.format.TextStyle
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContent {
+            var value by remember{ mutableFloatStateOf(0f) }
+//            var checked by remember{ mutable(0) }
             AndroidDevTheme {
-//
-                Column {
-                    Text(text = "Tanushree-Panda", color = Color.Yellow , fontSize = 30.sp,  fontWeight = FontWeight.Bold)
-                    Text("Hello World", color = Color.Blue)
-                    Text("Hello World", fontSize = 30.sp)
-                    val offset = Offset(5.0f, 10.0f)
-                    Text(
-                        text = "Hello world!",
-                        style = androidx.compose.ui.text.TextStyle(
-                            fontSize = 56.sp,
-                            shadow = Shadow(
-                                color = Color.Blue, offset = offset, blurRadius = 3f
-                            )
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+                Column (
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxSize(),
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    verticalArrangement = Arrangement.Center
+                ){
+                    Button(
+                        onClick = { println("Button is Clicked") }, //1
+//                        shape = RectangleShape,
+                        shape = RoundedCornerShape(10.dp),
+                        colors = ButtonDefaults.buttonColors(Color.Red),
+                        modifier = Modifier
+                            .size(width = 300.dp, height = 50.dp)) {
+                        Text(text = "Add to Cart", color = Color.White)
+                        Icon(
+                            Icons.Rounded.ShoppingCart,
+                            contentDescription = stringResource(id = R.string.shopping_cart_content_desc)
                         )
-                    )
-                    MultipleStylesInText()
-                    TextStyledBrushSnippet("The Text composable has multiple optional parameters to style its content. Below, we’ve listed parameters that cover the most common use cases with text. ")
-//                    TextStyledBrushSnippet()
-                    Text(
-                        text = buildAnnotatedString {
-                            append("Do not allow people to dim your shine\n")
-                            val rainbowColors: List<Color> = listOf(Color.Red, Color.Blue)
-                            withStyle(
-                                SpanStyle(
-                                    brush = Brush.linearGradient(
-                                        colors = rainbowColors
-                                    )
-                                )
-                            ) {
-                                append("because they are blinded.")
-                            }
-                            append("\nTell them to put some sunglasses on .")
-                        }
-                    )
+                    }
+
+                    FilledTonalButton(onClick = {println("Button is Clicked") //2
+                    }) {
+                        Text(text = "Add to Cart")
+                    }
+                    OutlinedButton(onClick = {println("Button is Clicked") //3
+                    }) {
+                        Text(text = "Add to Cart")
+
+                    }
+                    ElevatedButton(onClick = {println("Button is Clicked") //3
+                    }) {
+                        Text(text = "Add to Cart")
+
+                    }
+                    FloatingActionButton(onClick = { TODO() }, //4
+                        containerColor = colorResource(id = R.color.flipkart),
+                        contentColor = Color.Green
+                    ) {
+                        Icon(
+                            Icons.Default.Add,
+                            contentDescription = stringResource(id = R.string.shopping_cart_content_desc)
+                        )
+                    }
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = Color.Red, contentColor = Color.Green),
+                        modifier = Modifier
+                            .size(width = 100.dp, height = 200.dp)
+                    ) {
+                        Text(text = "Hello Card")
+                        Text(text = "I am inside Card")
+                    }
+                    Slider(value = value, onValueChange = {value = it})
+                    Text(text = value.toString())
+//                   Switch(checked = checked, onCheckedChange = )
+//                   (painter = painterResource(id = R.drawable.concert), contentDescription = "")
+
+
                 }
             }
-
-
         }
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        println("LifeCycle On Create Started")
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        println("LifeCycle On Resume Started")
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        println("LifeCycle On Pause Started")
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        println("LifeCycle On Stop Started")
-//    }
 }
 
 //@Composable
-//fun TextStyledBrushSnippet() {
-//    val rainbowColors: List<Color> = listOf()
-//    // [START android_compose_text_annotatedString_brush]
+//fun Greeting(name: String, modifier: Modifier = Modifier) {
 //    Text(
-//        text = buildAnnotatedString {
-//            append("Do not allow people to dim your shine\n")
-//            withStyle(
-//                SpanStyle(
-//                    brush = Brush.linearGradient(
-//                        colors = rainbowColors
-//                    )
-//                )
-//            ) {
-//                append("because they are blinded.")
-//            }
-//            append("\nTell them to put some sunglasses on.")
-//        }
+//        text = "Hello $name!",
+//        modifier = modifier
 //    )
-//    // [END android_compose_text_annotatedString_brush]
+//}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    ComposeComponentTheme {
+//        Greeting("Android")
+//    }
 //}
 
-@Composable
-fun MultipleStylesInText() {
-    Text(
-        buildAnnotatedString {
-            withStyle(style = SpanStyle(color = Color.Blue)) {
-                append("H")
-            }
-            append("ello ")
 
-            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Red)) {
-                append("W")
-            }
-            append("orld. \n New project")
-        }
-    )
-}
 
-@Composable
-fun TextStyledBrushSnippet(text: String) {
-    val lightBlue = Color(0xFF0066FF)
-    val purple = Color(0xFF800080)
-    val gradientColors = listOf(Color.Cyan, lightBlue, purple )
 
-    Text(
-        text = text,
-        style = androidx.compose.ui.text.TextStyle(
-            brush = Brush.linearGradient(
-                colors = gradientColors
-            )
-        )
-    )
-}
+
+
+
+
